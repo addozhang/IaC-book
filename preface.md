@@ -42,27 +42,27 @@ I’ve also seen that organizing and working with infrastructure code is difficu
 I don’t believe we’ve matured as an industry in how we manage infrastructure. I’m hoping this book gives a decent view of what teams are finding effective these days. And a bit of aspiration of what we can do better.
 I fully expect that in another five years the toolchains and approaches will evolve. We could see more general-purpose languages used to build libraries, and we could be dynamically generating infrastructure rather than defining the static details of envi‐ ronments at a low level. We certainly need to get better at managing changes to live infrastructure. Most teams I know are scared when applying code to live infrastruc‐ ture. (One team referred to Terraform as “Terrorform,” but users of other tools all feel this way.)
 
-## What This Book Is and Isn’t
+## 本书的内容
 
-The thesis of this book is that exploring different ways of using tools to implement infrastructure can help us to improve the quality of services we provide. We aim to use speed and frequency of delivery to improve the reliability and quality of what we deliver.
-So the focus of this book is less on specific tools, and more on how to use them.
-Although I mention examples of tools for particular functions like configuring servers and provisioning stacks, you won’t find details of how to use a particular tool or cloud platform. You will find patterns, practices, and techniques that should be relevant to whatever tools and platforms you use.
-You won’t find code examples for real-world tools or clouds. Tools change too quickly in this field to keep code examples accurate, but the advice in this book should age more slowly, and be applicable across tools. Instead, I write pseudocode examples for fictional tools to illustrate concepts. See the book’s companion website (https://infrastructure-as-code.com) for references to example projects and code.
-This book won’t guide you on how to use the Linux operating system, Kubernetes cluster configuration, or network routing. The scope of this book does include ways to provision infrastructure resources to create these things, and how to use code to deliver them. I share different cluster topology patterns and approaches for defining and managing clusters as code. I describe patterns for provisioning, configuring, and changing server instances using code.
-You should supplement the practices in this book with resources on the specific oper‐ ating systems, clustering technologies, and cloud platforms. Again, this book explains approaches for using these tools and technologies that are relevant regardless of the particular tool.
+本书的论题是，探索使用工具实现基础设施的不同方法，这些基础设施可以帮助我们提高所我们提供的服务质量。我们的目标是利用交付的速度和频率来提高我们所交付的可靠性和质量。
+所以本书的重点不在于具体的工具，而在于如何使用这些工具。
+虽然我提到了配置服务器和配置堆栈等特定功能的工具示例，但你不会找到如何使用特定工具或云平台的细节。你会发现与任何你使用的工具和平台所契合的模式、实践和技术。
+你不会找到现实中的工具或云的代码例子。在这个领域，工具变化太快，无法保持代码例子的准确性，但本书中的建议应该更缓慢地老化，并且适用于各种工具。相反，我为虚构的工具写了一些伪代码例子来说明概念。有关示例项目和代码的参考资料，请参见本书的配套网站（https://infrastructure-as-code.com）。
+本书不会指导你如何使用 Linux 操作系统、Kubernetes 集群配置或网络路由。本书的范围包括提供基础设施资源来创建这些东西的方法，以及如何使用代码来交付它们。我分享了不同的集群拓扑模式和以代码定义和管理集群的方法。我描述了使用代码提供、配置和更改服务器实例的模式。
+你应该用具体的操作系统、集群技术和云平台的资源来补充本书中的实践。同样，本书解释了使用这些工具和技术的方法，这些方法与特定工具无关。
 
-This book is also light on operability topics like monitoring and observability, log aggregation, identity management, and other concerns that you need to support serv‐ ices in a cloud environment. What’s in here should help you to manage the infra‐ structure needed for these services as code, but the details of the specific services are, again, something you’ll find in more specific resources.
+本书在可操作性方面的内容也不多，比如监控和可观察性、日志聚合、身份管理，以及在云环境中支持服务所需的其他问题。书中的内容应该可以帮助你以代码的形式管理这些服务所需的基础设施，但具体服务的细节，你可以在更具体的资源中找到。
 
-## Some History of Infrastructure as Code
+## 基础设施即代码的前生
 
-Infrastructure as Code tools and practices emerged well before the term. Systems administrators have been using scripts to help them manage systems since the begin‐ ning. Mark Burgess created the pioneering CFEngine (https://cfengine.com) system in 1993. I first learned practices for using code to fully automate provisioning and updates of servers from the Infrastructures.org (http://www.infrastructures.org) web‐ site in the early 2000s.3
-Infrastructure as Code has grown along with the DevOps movement. Andrew Clay- Shafer and Patrick Debois triggered the DevOps movement with a talk at the Agile 2008 conference (https://oreil.ly/ermR3). The first uses I’ve found for the term “Infra‐ structure as Code” are from a talk called “Agile Infrastructure” (https://oreil.ly/ qnJKX) that Clay-Shafer gave at the Velocity conference in 2009, and an article (https://oreil.ly/2F6y_) John Willis wrote summarizing the talk. Adam Jacob, who cofounded Chef, and Luke Kanies, founder of Puppet, were also using the phrase around this time.
+基础设施即代码工的具和实践在这个词出现之前就已经出现了。系统管理员从一开始就使用脚本来帮助他们管理系统。Mark Burgess 在 1993 年创建了开创性的 CFEngine（https://cfengine.com）系统。我在 2000 年初从 Infrastructures.org（http://www.infrastructures.org）的网站上第一次了解到使用代码来完全自动化配置和更新服务器的做法。
+基础架构即代码伴随着 DevOps 运动而发展。Andrew Clay-Shafer 和 Patrick Debois 在 2008 敏捷大会上的演讲引发了 DevOps 运动（https://oreil.ly/ermR3）。我发现“基础设施即代码”这个词的第一次使用是来自 Clay-Shafer 在 2009 年 Velocity 会议上发表的一篇名为“敏捷的基础设施”的演讲（https://oreil.ly/qnJKX），以及 John Willis 写的一篇总结该演讲的文章（https://oreil.ly/2F6y_）。Chef 的联合创始人 Adam Jacob 和 Puppet 的创始人 Luke Kanies 也在这个时候使用这个词。
 
-## Who This Book Is For
+## 谁该读这本书
 
-This book is for people who are involved in providing and using infrastructure to deliver and run software. You may have a background in systems and infrastructure, or in software development and delivery. Your role may be engineering, testing, architecture, or management. I’m assuming you have some exposure to cloud or vir‐ tualized infrastructure and tools for automating infrastructure using code.
-Readers new to Infrastructure as Code should find this book a good introduction to the topic, although you will get the most out of it if you are familiar with how infra‐ structure cloud platforms work, and the basics of at least one infrastructure coding tool.
-Those who have more experience working with these tools should find a mixture of familiar and new concepts and approaches. The content should create a common lan‐ guage and articulate challenges and solutions in ways that experienced practitioners and teams find useful.
+本书是为那些参与提供和使用基础设施来交付和运行软件的人准备的。你可能有系统和基础设施的背景，或者有软件开发和交付的背景。你的角色可能是工程、测试、架构或管理。我假设你或多或少接触了云或虚拟化基础设施和使用代码自动化基础设施的工具。
+刚接触基础设施即代码的读者应该会发现这本书是一个很好的主题介绍，尽管你熟悉基础设施云平台的工作方式，以及至少一种基础设施编码工具的基础知识，你仍会得到很大的收获。
+对于那些有更多使用这些工具经验的人来说，应该会发现熟悉的、新的概念与方法的组合。这些内容应创造一种通用的语言，并以有经验的从业人员和团队认为有用的方式阐明挑战和解决方案。
 
 ## Principles, Practices, and Patterns
 
