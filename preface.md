@@ -58,7 +58,7 @@ I fully expect that in another five years the toolchains and approaches will evo
 基础设施即代码工的具和实践在这个词出现之前就已经出现了。系统管理员从一开始就使用脚本来帮助他们管理系统。Mark Burgess 在 1993 年创建了开创性的 CFEngine（https://cfengine.com）系统。我在 2000 年初从 Infrastructures.org（http://www.infrastructures.org）的网站上第一次了解到使用代码来完全自动化配置和更新服务器的做法。
 基础架构即代码伴随着 DevOps 运动而发展。Andrew Clay-Shafer 和 Patrick Debois 在 2008 敏捷大会上的演讲引发了 DevOps 运动（https://oreil.ly/ermR3）。我发现“基础设施即代码”这个词的第一次使用是来自 Clay-Shafer 在 2009 年 Velocity 会议上发表的一篇名为“敏捷的基础设施”的演讲（https://oreil.ly/qnJKX），以及 John Willis 写的一篇总结该演讲的文章（https://oreil.ly/2F6y_）。Chef 的联合创始人 Adam Jacob 和 Puppet 的创始人 Luke Kanies 也在这个时候使用这个词。
 
-## 谁该读这本书
+## 本书适合谁
 
 本书是为那些参与提供和使用基础设施来交付和运行软件的人准备的。你可能有系统和基础设施的背景，或者有软件开发和交付的背景。你的角色可能是工程、测试、架构或管理。我假设你或多或少接触了云或虚拟化基础设施和使用代码自动化基础设施的工具。
 刚接触基础设施即代码的读者应该会发现这本书是一个很好的主题介绍，尽管你熟悉基础设施云平台的工作方式，以及至少一种基础设施编码工具的基础知识，你仍会得到很大的收获。
@@ -112,5 +112,4 @@ This element indicates a warning or caution.
 
 1 For example, many government and financial organizations in countries without a cloud presence are pre‐ vented by law from hosting data or transactions abroad.
 2 The research published by DORA in the State of DevOps Report (https://oreil.ly/ysk9n) finds that heavyweight change-management processes correlate to poor performance on change failure rates and other measures of software delivery effectiveness.
-
 
